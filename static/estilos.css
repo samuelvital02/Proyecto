@@ -1,0 +1,68 @@
+:root {
+    --verde-menta: #b2f2bb;
+    --verde-menta-oscuro: #69db7c;
+    --verde-menta-hover: #38d17a;
+    --blanco: #ffffff;
+    --gris-texto: #333;
+}
+
+* {
+    transition: all 0.2s ease-in-out;
+}
+
+body {
+    background-color: var(--blanco);
+    color: var(--gris-texto);
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    font-size: 1rem;
+}
+
+.navbar {
+    background-color: var(--verde-menta);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--gris-texto);
+}
+
+.footer {
+    background-color: var(--verde-menta-oscuro);
+    color: var(--blanco);
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-menta {
+    background-color: var(--verde-menta-oscuro);
+    color: var(--blanco);
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-menta:hover {
+    background-color: var(--verde-menta-hover);
+    color: var(--blanco);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1, h2, h4 {
+    color: var(--verde-menta-oscuro);
+}
+
+.list-group-item {
+    background-color: var(--blanco);
+    border: 1px solid #d9fbd0;
+}
+
+/* Contenedor estilizado para secciones */
+.section {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}

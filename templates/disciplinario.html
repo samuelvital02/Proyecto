@@ -1,0 +1,100 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">⚖️ Asistente de Proceso Disciplinario</h2>
+    <p class="lead text-center">Hola, instructor. Te guiaré paso a paso en la aplicación correcta del protocolo disciplinario según el reglamento institucional.</p>
+
+    <!-- Paso 1 -->
+    <div id="paso1" class="card p-4 mb-4">
+        <h4>🔍 ¿Se presentó una falta o comportamiento irregular?</h4>
+        <p>Puede ser un incumplimiento académico o de convivencia.</p>
+        <div class="d-flex gap-3">
+            <button class="btn btn-menta" onclick="mostrarPaso('paso2')">✅ Sí</button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">❌ No, volver al inicio</a>
+        </div>
+    </div>
+
+    <!-- Paso 2 -->
+    <div id="paso2" class="card p-4 mb-4 d-none">
+        <h4>⚠️ Evalúa la gravedad de la falta</h4>
+        <p>¿La conducta fue leve, grave o gravísima?</p>
+        <div class="d-flex flex-column gap-3">
+            <button class="btn btn-menta" onclick="mostrarPaso('paso3_leve')">🟢 Leve</button>
+            <button class="btn btn-menta" onclick="mostrarPaso('paso3_grave')">🔴 Grave o Gravísima</button>
+        </div>
+    </div>
+
+    <!-- Paso 3 Leve -->
+    <div id="paso3_leve" class="card p-4 mb-4 d-none">
+        <h4>🗣️ Aplica llamado de atención verbal</h4>
+        <p>Habla con el aprendiz y registra la situación internamente. Si reincide, pasa al plan de mejoramiento.</p>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso4')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 3 Grave -->
+    <div id="paso3_grave" class="card p-4 mb-4 d-none">
+        <h4>📋 Faltas graves requieren plan de mejoramiento disciplinario</h4>
+        <p>Si la falta fue grave o el aprendiz reincidió, elabora un plan formal.</p>
+        <a href="/static/formatos/plan_mejoramiento_disciplinario.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso5')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 4 -->
+    <div id="paso4" class="card p-4 mb-4 d-none">
+        <h4>🔁 ¿El aprendiz reincidió?</h4>
+        <p>Si vuelve a cometer la misma falta, deberás elaborar un plan de mejoramiento disciplinario.</p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">✅ No, proceso finalizado</a>
+            <button class="btn btn-menta" onclick="mostrarPaso('paso5')">❌ Sí, elaborar plan</button>
+        </div>
+    </div>
+
+    <!-- Paso 5 -->
+    <div id="paso5" class="card p-4 mb-4 d-none">
+        <h4>📝 Aplica el Plan de Mejoramiento Disciplinario</h4>
+        <p>Establece compromisos claros y tiempos definidos. Firma con el aprendiz.</p>
+        <a href="/static/formatos/plan_mejoramiento_disciplinario.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso6')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 6 -->
+    <div id="paso6" class="card p-4 mb-4 d-none">
+        <h4>📌 ¿El aprendiz cumplió el plan?</h4>
+        <p>Haz seguimiento al cumplimiento de los compromisos acordados.</p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">✅ Sí, proceso finalizado</a>
+            <button class="btn btn-menta" onclick="mostrarPaso('paso7')">❌ No, remitir al Comité</button>
+        </div>
+    </div>
+
+    <!-- Paso 7 -->
+    <div id="paso7" class="card p-4 mb-4 d-none">
+        <h4>🏛️ Remisión al Comité de Evaluación y Seguimiento</h4>
+        <p>Envía el caso al comité para que analice y recomiende sanción al Subdirector.</p>
+        <a href="/static/formatos/remision_comite.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato de remisión</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso8')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 8 -->
+    <div id="paso8" class="card p-4 mb-4 d-none">
+        <h4>📩 El Subdirector emite la sanción</h4>
+        <p>El Subdirector emite un acto administrativo, y el aprendiz es notificado oficialmente.</p>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-success btn-lg">🏁 Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarPaso(id) {
+        document.getElementById(id).classList.remove('d-none');
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+{% endblock %}

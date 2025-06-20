@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Asistente Virtual{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h2 class="fw-bold">👋 Bienvenido al Asistente Formativo</h2>
+    <p class="text-secondary">Estoy aquí para apoyarte con tus tareas formativas</p>
+</div>
+
+<div class="chat-container section">
+    <div class="chat-messages d-flex flex-column" id="chat-messages">
+        <div class="message message-bot">¡Hola! ¿En qué puedo ayudarte hoy?</div>
+    </div>
+
+    <div id="typing-indicator" class="text-muted fst-italic mt-2" style="display: none;">
+        Asistente está escribiendo...
+    </div>
+
+    <form id="chat-form" class="mt-3 d-flex">
+        <input type="text" class="form-control me-2" placeholder="Escribe tu mensaje..." id="user-input" autocomplete="off">
+        <button class="btn btn-menta" type="submit">Enviar</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("chat-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const input = document.getElementById("user-input");
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    const chatMessages = document.getElementById("chat-messages");
+
+    // Añade mensaje del usuario
+    const userMsg = document.createElement("div");
+    userMsg.className = "message message-user";
+    userMsg.textContent = userText;
+    chatMessages.appendChild(userMsg);
+    input.value = "";
+
+    // Mostrar indicador de escritura
+    const typing = document.getElementById("typing-indicator");
+    typing.style.display = "block";
+
+    // Simular respuesta del bot (aquí puedes hacer una petición al servidor)
+    setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.className = "message message-bot";
+        botMsg.textContent = "Gracias por tu mensaje. Estoy procesando tu solicitud.";
+        chatMessages.appendChild(botMsg);
+
+        typing.style.display = "none";
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+});
+</script>
+{% endblock %}

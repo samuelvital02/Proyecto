@@ -1,0 +1,99 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">📚 Asistente de Medidas Formativas Académicas</h2>
+    <p class="lead text-center">Hola, instructor. Estoy aquí para guiarte paso a paso en el proceso académico cuando un aprendiz no alcanza los resultados esperados.</p>
+
+    <!-- Paso 1 -->
+    <div id="paso1" class="card p-4 mb-4">
+        <h4>🔍 ¿El aprendiz no ha alcanzado los resultados esperados?</h4>
+        <p>Verifica si uno o más resultados de aprendizaje no fueron logrados por el aprendiz.</p>
+        <div class="d-flex gap-3">
+            <button class="btn btn-menta" onclick="mostrarPaso('paso2')">✅ Sí</button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">❌ No, volver al inicio</a>
+        </div>
+    </div>
+
+    <!-- Paso 2 -->
+    <div id="paso2" class="card p-4 mb-4 d-none">
+        <h4>✉️ Realiza el Primer Llamado de Atención Académico</h4>
+        <p>Diligencia el formato oficial y describe el resultado no alcanzado por el aprendiz.</p>
+        <a href="/static/formatos/llamado_academico.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso3')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 3 -->
+    <div id="paso3" class="card p-4 mb-4 d-none">
+        <h4>📊 ¿El aprendiz mejoró después del primer llamado?</h4>
+        <p>Evalúa si hay avances en su desempeño y compromiso con el proceso formativo.</p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">✅ Sí, proceso finalizado</a>
+            <button class="btn btn-menta" onclick="mostrarPaso('paso4')">❌ No, aplicar segundo llamado</button>
+        </div>
+    </div>
+
+    <!-- Paso 4 -->
+    <div id="paso4" class="card p-4 mb-4 d-none">
+        <h4>✉️ Segundo Llamado con Orientaciones Académicas</h4>
+        <p>Haz un segundo llamado por escrito e incluye orientaciones pedagógicas específicas.</p>
+        <a href="/static/formatos/llamado_academico.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso5')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 5 -->
+    <div id="paso5" class="card p-4 mb-4 d-none">
+        <h4>📝 ¿El aprendiz sigue sin mejorar?</h4>
+        <p>Si no hay mejora después de los dos llamados, aplica un Plan de Mejoramiento Académico.</p>
+        <a href="/static/formatos/plan_mejoramiento_academico.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar plan</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso6')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 6 -->
+    <div id="paso6" class="card p-4 mb-4 d-none">
+        <h4>✍️ Firma del Plan de Mejoramiento</h4>
+        <p>El plan debe ser firmado por el instructor, el aprendiz y el coordinador académico.</p>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso7')">✅ Continuar</button>
+    </div>
+
+    <!-- Paso 7 -->
+    <div id="paso7" class="card p-4 mb-4 d-none">
+        <h4>📌 Seguimiento del Plan</h4>
+        <p>Haz seguimiento a las actividades pactadas. Verifica cumplimiento de parte del aprendiz.</p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">✅ Cumplió, proceso finalizado</a>
+            <button class="btn btn-menta" onclick="mostrarPaso('paso8')">❌ No cumplió</button>
+        </div>
+    </div>
+
+    <!-- Paso 8 -->
+    <div id="paso8" class="card p-4 mb-4 d-none">
+        <h4>📤 Remisión al Comité de Evaluación y Seguimiento</h4>
+        <p>Remite el caso usando el formato oficial si el aprendiz no cumplió el plan.</p>
+        <a href="/static/formatos/remision_comite.pdf" class="btn btn-sm btn-outline-primary mb-3" download>📥 Descargar formato de remisión</a>
+        <br>
+        <button class="btn btn-menta" onclick="mostrarPaso('paso9')">✅ Finalizar</button>
+    </div>
+
+    <!-- Paso 9 -->
+    <div id="paso9" class="card p-4 mb-4 d-none">
+        <h4>📁 Registro y custodia de documentos</h4>
+        <p>Guarda todos los documentos (llamados, planes, remisión) en la carpeta digital del grupo, bajo custodia de Coordinación Académica.</p>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-success btn-lg">🏁 Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarPaso(id) {
+        document.getElementById(id).classList.remove('d-none');
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+{% endblock %}
